@@ -11,7 +11,7 @@ import SwiftUI
 struct CountdownSwiftConcurrencyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CountdownView()
         }
     }
 }

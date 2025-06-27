@@ -11,6 +11,7 @@
 		D11774422E0F657C00D082F9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11774412E0F657C00D082F9 /* ContentView.swift */; };
 		D11774442E0F657D00D082F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D11774432E0F657D00D082F9 /* Assets.xcassets */; };
 		D11774472E0F657D00D082F9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D11774462E0F657D00D082F9 /* Preview Assets.xcassets */; };
+		D117744E2E0F65BF00D082F9 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D117744D2E0F65BF00D082F9 /* CountdownView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		D11774412E0F657C00D082F9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D11774432E0F657D00D082F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D11774462E0F657D00D082F9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D117744D2E0F65BF00D082F9 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				D11774412E0F657C00D082F9 /* ContentView.swift */,
 				D11774432E0F657D00D082F9 /* Assets.xcassets */,
 				D11774452E0F657D00D082F9 /* Preview Content */,
+				D117744D2E0F65BF00D082F9 /* CountdownView.swift */,
 			);
 			path = CountdownSwiftConcurrency;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D117744E2E0F65BF00D082F9 /* CountdownView.swift in Sources */,
 				D11774422E0F657C00D082F9 /* ContentView.swift in Sources */,
 				D11774402E0F657C00D082F9 /* CountdownSwiftConcurrencyApp.swift in Sources */,
 			);
