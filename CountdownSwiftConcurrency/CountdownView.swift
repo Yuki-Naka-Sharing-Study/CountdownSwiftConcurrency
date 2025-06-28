@@ -9,10 +9,11 @@ import SwiftUI
 
 struct CountdownView: View {
     @State private var remainingSeconds: Int = 10
-    @State private var isRunning: Bool = false
-    @State private var message: String = ""
+    @State private var isRunning = false
+    @State private var message = ""
+    @State private var countdownTask: Task<Void, Never>? = nil
     
-    let initialSeconds = 10  // ← カウントダウン初期値
+    let initialSeconds = 10
     
     var body: some View {
         VStack(spacing: 20) {
@@ -24,18 +25,25 @@ struct CountdownView: View {
                     .foregroundColor(.green)
             }
             
-            Button(action: {
-                if !isRunning {
-                    startCountdown()
+            HStack {
+                Button(action: startCountdown) {
+                    Text("開始")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
-            }) {
-                Text(isRunning ? "カウント中..." : "開始")
-                    .padding()
-                    .background(isRunning ? Color.gray : Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                .disabled(isRunning || remainingSeconds <= 0)
+                
+                Button(action: cancelCountdown) {
+                    Text("キャンセル")
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .disabled(!isRunning)
             }
-            .disabled(isRunning)
         }
         .padding()
     }
@@ -43,19 +51,31 @@ struct CountdownView: View {
     func startCountdown() {
         isRunning = true
         message = ""
-        remainingSeconds = initialSeconds  // ← ✅ 再スタート時にリセット
-        Task {
-            await countDown(from: initialSeconds)  // ← ✅ 初期値を渡す
+        
+        countdownTask = Task {
+            do {
+                try await countDown()
+                if remainingSeconds == 0 {
+                    message = "カウントダウン終了！"
+                }
+            } catch {
+                message = "キャンセルされました"
+            }
+            isRunning = false
         }
     }
     
-    func countDown(from seconds: Int) async {
-        for sec in (0..<seconds).reversed() {
-            try? await Task.sleep(nanoseconds: 1_000_000_000)
-            remainingSeconds = sec
+    func cancelCountdown() {
+        countdownTask?.cancel()
+        countdownTask = nil
+    }
+    
+    func countDown() async throws {
+        while remainingSeconds > 0 {
+            try Task.checkCancellation()
+            try await Task.sleep(nanoseconds: 1_000_000_000)
+            remainingSeconds -= 1
         }
-        isRunning = false
-        message = "カウントダウン終了！"
     }
 }
 
